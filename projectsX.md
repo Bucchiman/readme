@@ -82,24 +82,58 @@
 
 
 # Camera, LiDARをヒュージョンさせた速度推定手法の調査
-## Detection+Tracking
+イメージカメラ、LiDARなどのセンサーを使って速度測定を行うため、センサーフュージョンと2D/3Dト
+ラッキング技術を調査・検討・評価を実施し、ロボット搭載に適したモデルを選定する。選定したモデルを
+ROS2ノードとして実装する。
+## RGB/LiDAR Detection+Tracking
 - EagerMOT
 - DeepFusionMOT
 - PolarMOT
 - JRMOT
 - TransFusion
 
-## Detection
+## RGB/LiDAR Detection
 - BEVFusion
 - MVX-Net
 - BSH-Det3D
 - 3D Dual-Fusion
 
-## Tracking
+## 2D/3D Tracking
 - SORT/DeepSORT
 - StrongSORT
 - EagerMOT
 
+## RGB Detection+Tracking
+- SORT/DeepSORT
+- Tracktor
+- QDTrack
+- ByteTrack
+- OC-SORT
+- FairMOT
+- UniTrack
+
+## RGB Detection
+- YOLOX
+- EfficientDet
 
 # Camera
 
+# Ladar
+## Detection
+- RODNet
+
+## 3D Object Detection
+- CenterFusion
+- CRF-Net
+- RODNet
+- BIRANet
+- Radar Guided Dynamic Visual Attention for Resource-Efficient RGB Object Detection
+- Destance Vehicle Detection Using Radar and Vision
+
+## Ladar/LiDAR/Camera 3D Object Detection
+- RadarVoxelFusionNet
+- SeeingThroughFog
+
+## LadarRGB-Depth Obstacle Detection(for people)
+- Fusion of Millimeter wave Ladar and RGB-Depth sensors for assisted navigation of the visually impaired
+- Unifying Obstacle Detection, Recognition and Fusion Based on Millimeter Wave Radar and RGB-Depth Sensors for the Visually Impaired
