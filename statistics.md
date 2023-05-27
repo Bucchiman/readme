@@ -206,13 +206,65 @@ N枚の正しいコインを投げる実験を行って、表が11枚出た、�
 
 $n\rightarrow \infinity$の時$f(x)$は標準正規分布$N(1, 1)$の確率密度関数
 
+# 確率分布
+> 定義 <br>
+> 離散的な確率変数Xの確率関数をf(x)とする時 <br>
+> $E[X] = \sum^n_{i=1}x_if(x_i)$ <br>
+> をXの平均という。 <br>
+> $\mu = E[X]$とおくとき <br>
+> $V[X = \sum^n_{i=1}(x_i-\mu)^2f(x_i)$ <br>
+> をXの分散という。
+
+> 定理 <br>
+> 離散的な確率変数Xの確率関数f(x)とし、
+> $E[X^2] = \sum^n_{i=1}x^2_if(x_i)$
+> とする時、
+> $V[X] = E[X^2] - E[X]^2$
+> が成り立つ。
 
 # 多変量の確率分布
-```
-    3つの確率変数$X, Y$について$E[X]=\mu_{x}, E[Y]=\mu_{y}$とする時
-    $C[X, Y] = E[(X-\mu_{x})(Y-\mu_y)]$
-    をXとYの共分散という
-```
+> <span style="color: red; ">定義</span> <br>
+> 3つの確率変数$X, Y$について$E[X]=\mu_{x}, E[Y]=\mu_{y}$とする時 <br>
+> $C[X, Y] = E[(X-\mu_{x})(Y-\mu_y)]$ <br>
+> をXとYの共分散という
+
+> 定理
+> 2つの確率変数X, Yについて次式が成り立つ <br>
+> $E[aX+bY] = aE[X]+bE[Y]$ <br>
+> $V[aX+bY] = a^2V[X] + 2abC[X, Y]+b^2V[Y]$ <br>
+> $C[X, Y] = E[XY] - E[X]E[Y]$
+
+> 定義 <br>
+> X,Yの同時確率密度関数をh(x, y), X,Yの確率密度関数をそれぞれf(x), g(y)とする <br>
+> $h(x, y) = f(x)g(y)$ <br>
+> が成立するとき、X,Yは独立であるという
+
+> 定理 <br>
+> X, Yが独立な確率変数の時、次式が成り立つ。 <br>
+> $E[XY] = E[X]E[Y]$ <br>
+> $C[X, Y] = 0$ <br>
+> $V[aX+bY = a^2V[X] + b^2V[Y]$ <br>
+
+## 中心極限定理
+> 定理 <br>
+> 互いに独立なn個の確率変数$X_1,X_2,\cdots,X_n$が平均$\mu$, 分散$\sigma^2$を持つ同一な確率分布に従っているとき、確率変数 <br>
+> $X = \frac{1}{n}(X_1+X_2+\cdots+X_n)$ <br>
+> について <br>
+>  $ E[X] = \mu $ <br>
+>  $ V[X] = \frac{\sigma^2}{n} $
+
+> 定理 <br>
+> 互いに独立なn個の確率変数 $X_1, X_2, \cdots, X_n$が、平均$\mu$, 分散$\sigma^2$を持つ同一の確率分布に従っているとする。 <br>
+> この時、確率変数 <br>
+> $ Y = \frac{X-\mu}{\sqrt{\frac{\sigma^2}{n}}}$
+
+<details>
+<summary>xxx</summary>
+
+aaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbbbbb
+ccccccccccccccccccccc
+</details>
 
 
 
