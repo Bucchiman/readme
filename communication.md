@@ -5,7 +5,11 @@
  LastModified:  2023-01-25 10:56:12 +0900
  Reference:     8ucchiman.jp
  Description:   https://tonkun-tech.com/serial-uart-csi-i2c/
+                https://emb.macnica.co.jp/articles/8191/
 -->
+
+# 通信
+
 
 
 # UART
