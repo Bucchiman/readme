@@ -3,7 +3,7 @@
  Author:        8ucchiman
  CreatedDate:   2023-05-24 14:51:02
  LastModified:  2023-01-25 10:56:12 +0900
- Reference:     8ucchiman.jp
+ Reference:     https://doc.rust-lang.org/rust-by-example/index.html
  Description:   ---
 -->
 
@@ -41,4 +41,40 @@
 
 
 # 構造体
+
+## 構造体更新記法
+```rust
+    struct User {
+        username: String,
+        email: String,
+        sign_in_count: u64,
+        active: bool,
+    }
+
+    let user1 = User {
+        email: String::from("someone@example.com"),
+        username: String::from("someusername123"),
+        active: true,
+        sign_in_count: 1,
+    };
+
+    let user2 = User {
+        email: String::from("another@example.com"),
+        username: String::from("anotherusername567"),
+        ..user1      # 残りのフィールドはuser1にする
+    };
+```
+
+## タプル構造体
+`異なる型を生成する名前付きフィールドのないタプル構造体`
+```
+    struct Color(i32, i32, i32);
+    struct Point(i32, i32, i32);
+
+    let black = Color(0, 0, 0):
+    let origin = Point(0, 0, 0);
+```
+
+## ユニット構造体
+`フィールドのないユニット様構造体`
 
