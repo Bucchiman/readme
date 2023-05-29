@@ -8,6 +8,116 @@
 -->
 
 
+# 確率分布
+> 定義 <br>
+> 離散的な確率変数Xの確率関数をf(x)とする時 <br>
+> $E[X] = \sum^n_{i=1}x_if(x_i)$ <br>
+> をXの平均という。 <br>
+> $\mu = E[X]$とおくとき <br>
+> $V[X = \sum^n_{i=1}(x_i-\mu)^2f(x_i)$ <br>
+> をXの分散という。
+
+> 定理 <br>
+> 離散的な確率変数Xの確率関数f(x)とし、
+> $E[X^2] = \sum^n_{i=1}x^2_if(x_i)$
+> とする時、
+> $V[X] = E[X^2] - E[X]^2$
+> が成り立つ。
+
+# 多変量の確率分布
+> <span style="color: red; ">定義</span> <br>
+> 3つの確率変数$X, Y$について$E[X]=\mu_{x}, E[Y]=\mu_{y}$とする時 <br>
+> $C[X, Y] = E[(X-\mu_{x})(Y-\mu_y)]$ <br>
+> をXとYの共分散という
+
+> 定理
+> 2つの確率変数X, Yについて次式が成り立つ <br>
+> $E[aX+bY] = aE[X]+bE[Y]$ <br>
+> $V[aX+bY] = a^2V[X] + 2abC[X, Y]+b^2V[Y]$ <br>
+> $C[X, Y] = E[XY] - E[X]E[Y]$
+
+> 定義 <br>
+> X,Yの同時確率密度関数をh(x, y), X,Yの確率密度関数をそれぞれf(x), g(y)とする <br>
+> $h(x, y) = f(x)g(y)$ <br>
+> が成立するとき、X,Yは独立であるという
+
+> 定理 <br>
+> X, Yが独立な確率変数の時、次式が成り立つ。 <br>
+> $E[XY] = E[X]E[Y]$ <br>
+> $C[X, Y] = 0$ <br>
+> $V[aX+bY = a^2V[X] + b^2V[Y]$ <br>
+
+## 中心極限定理
+> 定理 <br>
+> 互いに独立なn個の確率変数$X_1,X_2,\cdots,X_n$が平均$\mu$, 分散$\sigma^2$を持つ同一な確率分布に従っているとき、確率変数 <br>
+> $X = \frac{1}{n}(X_1+X_2+\cdots+X_n)$ <br>
+> について <br>
+>  $ E[X] = \mu $ <br>
+>  $ V[X] = \frac{\sigma^2}{n} $
+
+> 定理 <br>
+> 互いに独立なn個の確率変数 $X_1, X_2, \cdots, X_n$が、平均$\mu$, 分散$\sigma^2$を持つ同一の確率分布に従っているとする。 <br>
+> この時、確率変数 <br>
+> $ Y = \frac{X-\mu}{\sqrt{\frac{\sigma^2}{n}}}$
+
+# 推測統計
+## t分布
+t分布はnをパラメータに持つ分布。
+nをt分布の自由度という。
+標準正規分布と形は似ているので、$n>30$の時、t分布は標準正規分布として近似することが多い。
+
+## $\chi^2$分布
+$\chi^2$分布は、パラメータnを持った分布。
+
+## F分布
+2つのパラメータ$m, n$を持つ分布で$(m, n)$をF分布の自由度という。
+
+## 推定
+### 点推定
+> 定義
+> 未知母数$\theta$に対して、$\theta$の推定値を与える標本$X_1, X_2, \cdots,X_n$の関数
+> $\Theta = T(X_1, X_2, \cdots, X_n)$
+> を$\theta$の推定量という。
+> 推定量の実現値$T(x_1, x_2, \cdots, x_n)$を用いて未知母数$\theta$の値を推定する方法を点推定という。
+
+<details>
+<summary>e.g.</summary>
+$X = \frac{1}{n}(X_1+X_2+\cdots+X_n)$
+ は1つの推定量である。
+ 標本$X_1, X_2,\cdots, X_n$の実現値が異なれば推定量$T(X_1, X_2, \cdots, X_n)$
+の値も異なるため、$T(X_1, X_2, \cdots, X_n)$も確率変数となる。
+</details>
+
+推定量には、不偏推定量、一致推定量、有効推定量、最尤推定量などがある。
+
+### 不偏推定量
+> 定義
+> 未知母数$\theta$の推定量$\Theta=T(X_1, X_2, \cdots,X_n)$が
+> $E[\Theta] = \theta$
+> という性質を持つとき、$\Theta$を不偏推定量という。
+<details>
+ <summary>Description</summary>
+ 標本$X_1, X_2, \cdots, X_n$の実現値$x_1, x_2, \cdots, x_n$により$\Theta$は色々な値をとる。
+ その値の平均を取ったとき、母数$\theta$になる推定量を不偏推定量という。
+ また、標本の数$n$が十分に大きければ$\Theta_n$の実現値が母数$\theta$に近づく確率が高くなる時、$\Theta_n$を$\theta$の一致推定量という。
+</details>
+
+> 定理
+> 標本$X_1, X_2, \cdots , X_n$に対し、母平均$\mu$の推定量
+> $X = \frac{1}{n}\sum_{i=1}^nX_i$
+> は$\mu$の不偏推定量である。
+<details>
+ <summary>証明</summary>
+ $E[X] = \mu$を示せば良い。
+ 標本$X_1, X_2, \cdots , X_n$の各$X_i$は母平均$\mu$を持った母集団から取り出しているので,
+ $E[X_i] = \mu$
+ が成り立つ。
+ $ E[X] = E[\frac{1}{n}\sum_{i=1}^n X_i] = \frac{1}{n}\sum_{i=1}^nE[X_i]$
+ $ E[X] = \frac{1}{n}\sum_{i=1}^n\mu $
+ $ E[X] = \frac{\mu}{n}\times n = \mu $
+</details>
+
+
 # $P(x; d), P(x|d)$
 - P(x; d) : d is parameter
 - P(x| d) : 
@@ -207,12 +317,13 @@ N枚の正しいコインを投げる実験を行って、表が11枚出た、�
 $n\rightarrow \infinity$の時$f(x)$は標準正規分布$N(1, 1)$の確率密度関数
 
 
-# 多変量の確率分布
-```
-    3つの確率変数$X, Y$について$E[X]=\mu_{x}, E[Y]=\mu_{y}$とする時
-    $C[X, Y] = E[(X-\mu_{x})(Y-\mu_y)]$
-    をXとYの共分散という
-```
+<details>
+<summary>xxx</summary>
+
+aaaaaaaaaaaaaaaaaaaaa
+bbbbbbbbbbbbbbbbbbb
+ccccccccccccccccccccc
+</details>
 
 
 
