@@ -10,5 +10,20 @@
 
 # Tutorials
 <details>
-<summary>- Beinner:CLI tools</summary>
+<summary>Beinner:CLI tools</summary>
+</details>
+<details>
+ <summary>Beginner:Client libraries</summary>
+</details>
+<details>
+ <summary>Intermediate</summary>
+</details>
+<details>
+ <summary>Advanced</summary>
+</details>
+<details>
+ <summary>Demos</summary>
+</details>
+<details>
+ <summary>Miscellaneous</summary>
 </details>
