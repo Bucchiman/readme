@@ -33,6 +33,30 @@
 </details>
 <details>
  <summary>Intermediate</summary>
+## Managing Dependencies with rosdep
+### What is rosdep?
+ 依存管理コマンド。colconはビルドするだけで依存関係まで解決しない。
+ rosdepはpackage.xmlから依存関係のチェックをする。
+
+### What is `package.xml`?
+依存関係に関するファイル。
+- \<depend\>
+- \<test_depend\> ... `gtest`
+- \<exec_depend\>
+- \<build_depend\>
+- \<build_export_depend\>
+
+## Creating an action
+### Background
+
+
+## Writing an action server and client(C++)
+## Composing multiple nodes in a single process
+## Monitoring for parameter changes(C++)
+## Launch
+## tf2
+## Testing
+## URDF
 </details>
 <details>
  <summary>Advanced</summary>
