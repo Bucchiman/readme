@@ -18,3 +18,14 @@ bbb
 ccccccccccccccccccccccccc
 
 </details>
+
+
+# fold + link
+
+<details>
+ <summary> hogehoge </summary>
+ <div>
+  
+  ![Service-MultipleServiceClient](https://github.com/Bucchiman/readme/assets/52972710/aa765780-905d-4fb5-af2e-a09ab8daad0f)
+ </div>
+</details
