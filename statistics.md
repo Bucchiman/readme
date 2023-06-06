@@ -328,6 +328,7 @@ ccccccccccccccccccccc
 
 
 # 最尤推定
+`尤度関数$\prod_{k=1}^{n}p(X_{i}|w)$を最大にするパラメータ$w$決定する`
 パラメータ$\theta$に従う分布の密度関数を$f(x;\theta)$とする。
 尤度関数を$L(\theta;x) = f(x;\theta)$とすると、$L(\theta;x)$を最大にするような推定量$\theta=\bar{\theta}$を$\theta$の最尤推定量という。
 尤度関数とは、パラメータ$\theta$を変数としてみた時の関数。
