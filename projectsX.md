@@ -137,3 +137,92 @@ ROS2ノードとして実装する。
 ## LadarRGB-Depth Obstacle Detection(for people)
 - Fusion of Millimeter wave Ladar and RGB-Depth sensors for assisted navigation of the visually impaired
 - Unifying Obstacle Detection, Recognition and Fusion Based on Millimeter Wave Radar and RGB-Depth Sensors for the Visually Impaired
+
+
+# 06/09 速度推定
+## others o 
+Index	Algorithm	Year	Repository	License	Input	output	fps	Backbone	Remarks
+1	UniAD​	2023​	o	Apache-2.0​	"Multi-view sensor?
+or
+Vision-only input?
+両対応している?"		1.8(A100)	Resnet101	"CVPR2023 Award Candidate
+Theme: ""Planning-oriented Autonomous Driving""
+Detection,Tracking,Mapping,Motion prediction, Occupancy map prediction,planning(次の行動の予定)について一つのnetworkで行うフレームワークの論文"
+2	VoxelNeXt​	2023​	o	Apache-2.0​					"3D Detection and Tracking
+Theme: ""VoxelNeXt: Fully Sparse VoxelNet for 3D Object Detection and Tracking""
+演算量(FLOPs)についてCenterPointと比較(Sparse CNN: CenterPointより1/2削減, Head: CenterPointより1/10以上削減)"
+3	MSeg3D​	2023​	o	-	"multi-camera images
++
+Lidar point cloud"	semantic segmentation			"Multi-modal Semantic segmentation Segmentation
+Theme: ""MSeg3D: Multi-modal 3D Semantic Segmentation for Autonomous Driving"""
+4	3D consistent patch attack​	2023​	-​	-​					3D Detection
+5	MSMDFusion​	2023​	o	Apache-2.0​					"3D Detection(+Tracking?​)
+Theme: ""MSMDFusion: Fusing LiDAR and Camera at Multiple Scales with Multi-Depth Seeds for 3D Object Detection"""
+
+- CenterPoint
+- CenterTrack
+
+## 2d 3d tracking o 
+index	Model	Year	Repository	License	Input	Output	Backbone	FPS - Tracking only		Accuracy - KITTI		LongRange	memory	Remarks
+		Year	Repository	License	Input	Output	Backbone	Kitti	NuScenes	HOTA	AMOTA			
+1	SORT/DeepSORT​	2016/2017​	o	Apache-2.0​										MMTracking​
+			o	GPL-3.0​										Official​
+			o	GPL-3.0​										Official​
+2	StrongSORT​	2022​	o	GPL-3.0​										2D Tracking​
+3	EagerMOT​	2021​	o	MIT​										Detectorを入れ替え​
+4	MOTSFusion	2020	o	MIT​										
+
+## 3D Detection + tracking(LiDAR+RGB) x
+index	Model	Year	Repository	License	Input	Output	Backbone	FPS - Tracking only		Accuracy - KITTI		LongRange	memory	Remarks
+		Year	Repository	License	Input	Output	Backbone	Kitti	NuScenes	HOTA	AMOTA			
+1	MSMDFusion​	2023​	o	Apache-2.0​								-	-	CVPR2023​
+2	DeepFusionMOT​	2022​	o	MIT​				110		75	0.635	-	-	IROS2022​
+3	PolarMOT​	2022​	o	MIT​				170	33		0.664	-	-	ECCV2022​
+4	TransFusion​	2022​	o	Apache-2.0​							0.718	-	-	CVPR2022​
+5	EagerMOT​	2021​	o	MIT​				90	4		0.677	-	-	ICRA2021​
+6	AlphaTrack​	2021​	-​	-​								-	-	​
+7	JRMOT​	2020​	o	MIT​				25		70		-	-	​
+8	StrongSORT	2022​	o	GPL-3.0​				50		77		-	-	
+
+## 3D Detection (LiDAR+RGB) o 
+index	Model	Year	Repository	License	Input	Output	Backbone	FPS		Accuracy		LongRange	memory	Remarks
+								Kitti	NuScenes	Kitti	NuScenes			
+1	DFR-FastMOT​	2023​	x	-								-	-	
+2	BEVFusion​	2022​	o	Apache-2.0​					8.4		75	-	-	​
+3	MVX-Net​	2019​	o	Apache-2.0​				40		65.2		-	-	MMDetection3Dの一部​
+4	BSH-Det3D​	2023​	o	​				20.83		77		-	-	Code is coming soon.​
+5	3D Dual-Fusion​	2022​	o	​						79.3	70.6	-	-	​
+6	Fast-CLOCs​	2022​	-​	-​								-	-	​
+7	UVTR​	2022​	o	Apache-2.0​								-	-	​
+8	Point-GNN	2020	o	MIT										
+
+
+## 3D Detection (Stereo) o 
+index	Model	Year	Repository	License	Input	Output	Backbone	Inference/fps/flops	Ap	LongRange	memory	Remarks
+1	DSGN++	2022	o	Apache-2.0	"Binomicular
+Images"	"3D Detection
++
+Depth Map"		"5.62
+(a RTX2080Ti)"	67.37	50m	-	"Siamese Network
+Joint Stereo-LiDAR copy-paste"
+2	Chen et al.	2022	o	記載なし	-	-		-	-	-	-	-
+3	ESGN	2022	x	---	Binomicular images + LiDAR			"16.13
+(a RTX3090)"	38.42	-	-	
+4	LIGA-Stereo	2021	o	Apache-2.0	Binomicular Images			"2.86
+(V100)"	57.22	-	-	
+5	YOLOStereo3D	2021	o	Apache-2.0	Binomicular images	"3D Detection
++
+Disparity Estimation"		"20
+(a RTX3090)"	41.25	-	-	
+6	Stereo CenterNet	2021	x	---	Binomicular images			"25
+(a RTX3090)"		-	-	"3D detection
+realtime performance"
+7	DSGN	2020	o	MIT	Biomicular images	"3D Detection
++
+Disparity Estimation"		"1.49
+(a RTX3090/V100)"	52.18	-	-	
+8	RTS3D	2020	o	MIT	Binomicular images	3D Detection		"25.64
+(a RTX3090)"	45.58		-	Siamese Network
+9	OC Stereo	2020	x	---	Binomicular images			2.86	41.44	-	-	
+10	Stereo R-CNN	2019	o	MIT	Binomicular images			"3.33
+(a RTX3090)"	34.05	-	-	
