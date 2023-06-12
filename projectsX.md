@@ -145,7 +145,7 @@ Index	Algorithm	Year	Repository	License	Input	output	fps	Backbone	Remarks
 1	UniAD​	2023​	o	Apache-2.0​	"Multi-view sensor?
 or
 Vision-only input?
-両対応している?"		1.8(A100)	Resnet101	"CVPR2023 Award Candidate
+両対応している?"	Planning position(xyz)	1.8(A100)	Resnet101	"CVPR2023 Award Candidate
 Theme: ""Planning-oriented Autonomous Driving""
 Detection,Tracking,Mapping,Motion prediction, Occupancy map prediction,planning(次の行動の予定)について一つのnetworkで行うフレームワークの論文"
 2	VoxelNeXt​	2023​	o	Apache-2.0​					"3D Detection and Tracking
@@ -158,6 +158,9 @@ Theme: ""MSeg3D: Multi-modal 3D Semantic Segmentation for Autonomous Driving"""
 4	3D consistent patch attack​	2023​	-​	-​					3D Detection
 5	MSMDFusion​	2023​	o	Apache-2.0​					"3D Detection(+Tracking?​)
 Theme: ""MSMDFusion: Fusing LiDAR and Camera at Multiple Scales with Multi-Depth Seeds for 3D Object Detection"""
+6	FlatFormer	2023	x	-	-	"LiDAR point cloud
+-> 3D Detection"	16.1(Orin)		"the first point cloud transformer that
+achieves real-time performance on edge GPUs(Orinで>10fps達成)"
 
 - CenterPoint
 - CenterTrack
@@ -185,24 +188,34 @@ index	Model	Year	Repository	License	Input	Output	Backbone	FPS - Tracking only		A
 8	StrongSORT	2022​	o	GPL-3.0​				50		77		-	-	
 
 ## 3D Detection (LiDAR+RGB) o 
-index	Model	Year	Repository	License	Input	Output	Backbone	FPS		Accuracy		LongRange	memory	Remarks
-								Kitti	NuScenes	Kitti	NuScenes			
-1	DFR-FastMOT​	2023​	x	-								-	-	
-2	BEVFusion​	2022​	o	Apache-2.0​					8.4		75	-	-	​
-3	MVX-Net​	2019​	o	Apache-2.0​				40		65.2		-	-	MMDetection3Dの一部​
-4	BSH-Det3D​	2023​	o	​				20.83		77		-	-	Code is coming soon.​
-5	3D Dual-Fusion​	2022​	o	​						79.3	70.6	-	-	​
-6	Fast-CLOCs​	2022​	-​	-​								-	-	​
-7	UVTR​	2022​	o	Apache-2.0​								-	-	​
-8	Point-GNN	2020	o	MIT										
+index	Model	Year	Repository	License	Input	Output	Backbone	Num Classes	FPS		Accuracy		LongRange	memory	Remarks
+									Kitti	NuScenes	Kitti	NuScenes			
+1	DFR-FastMOT​	2023​	x	-									-	-	
+2	BEVFusion​	2022​	o	Apache-2.0​	"RGB(256x704)
++
+LiDAR point cloud"	"3D Detection
++
+Task Specific Heads"	"Swin-T(RGB)
++
+VoxelNet(LiDAR)"	10	-	8.4(RTX3090)	-	75	30m以上の評価あり	-	OK
+3	MVX-Net​	2019​	o	Apache-2.0​	"RGB
++
+LiDAR point cloud"	3D Detection	-	-	40	-	65.2	-	-	-	MMDetection3Dの一部​
+4	BSH-Det3D​	2023​	o(No Sourcecode)	​					20.83	-	77	-	-	-	Code is coming soon.​
+5	3D Dual-Fusion​	2022​	o	-	"Multi view camera RGB()
++
+LiDAR point cloud"	3D Detection	VoxelNet(LiDAR)		-	-	79.3	70.6	30m以上の評価あり	-	
+6	Fast-CLOCs​	2022​	-​	-​									-	-	​
+7	UVTR​	2022​	o	Apache-2.0​					-	9.3(V100)			30m以上の評価あり	-	​
+8	Point-GNN	2020	o	MIT											
 
 
 ## 3D Detection (Stereo) o 
 index	Model	Year	Repository	License	Input	Output	Backbone	Inference/fps/flops	Ap	LongRange	memory	Remarks
 1	DSGN++	2022	o	Apache-2.0	"Binomicular
-Images"	"3D Detection
+Images(384x1248)"	"3D Detection
 +
-Depth Map"		"5.62
+Depth Map"	PSMNet(or ResNet34)	"5.62
 (a RTX2080Ti)"	67.37	50m	-	"Siamese Network
 Joint Stereo-LiDAR copy-paste"
 2	Chen et al.	2022	o	記載なし	-	-		-	-	-	-	-
