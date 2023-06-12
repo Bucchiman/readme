@@ -34,36 +34,14 @@
 `画像座標系` `カメラ座標系` `世界座標系`
 ![image](https://github.com/Bucchiman/readme/assets/52972710/aa801f84-36a0-46e8-b942-d448647fbd4b)
 
-
-```
-
-
-
-
-
-
-
-
-
-
-           Z_c ->
-             -
-  光学中心 -
-          o-
-          | -
-          |  -> X_c
-     Y_c  v
-  カメラ座標
-```
-
 # 座標変換
-`内部パラメータ: カメラ->画像` `外部パラメータ: 世界->カメラ`
+`内部パラメータ: カメラ->画像` `外部パラメータ: 世界->カメラ` <br />
 3D点を画像平面に投影するためには、ワールド座標系->カメラ座標系->画像座標系
 の順に変換する。
 カメラ->画像の変換を表すのが内部パラメータ, ワールド座標系->カメラ座標系を表すのが外部パラメータである。
 
 # カメラから画像へ
-$
+$$
     s \begin{pmatrix} u \\ v \\ 1 \end{pmatrix} = 
       \begin{pmatrix} f_x & 0 & c_x \\
                       0 & f_y & c_y \\
@@ -72,10 +50,10 @@ $
       \begin{pmatrix}
         X_c \\ Y_c \\ Z_c
       \end{pmatrix}
-$
+$$
 
 # 世界からカメラへ
-$
+$$
     $ \begin{pmatrix} X_c \\ Y_c \\ Z_c \\ 1 \end{pmatrix} =
       \begin{pmatrix} r_{11} && r_{12} && r_{13} && t_1 \\
                       r_{21} && r_{22} && r_{23} && t_2 \\
@@ -83,12 +61,12 @@ $
                       0 & 0 & 0 & 1
       \end{pmatrix}
       \begin{pmatrix} X_w \\ Y_w \\ Z_w \\ 1 \end{pmatrix}
-$
+$$
 
 
 # Perspective-n-Point(PnP)問題
 `未知: 外部パラメータ` `既知: 内部パラメータ` `3次元座標の既知な点とその画像中の画素の複数ペアから外部パラメータを算出する問題。`
-$su = K\begin{pmatrix}R & T\end{pmatrix} X_w$
+$`su = K\begin{pmatrix}R & T\end{pmatrix} X_w`$
 
 - u: 画像座標
 - K: 内部パラメータ
@@ -104,8 +82,8 @@ $su = K\begin{pmatrix}R & T\end{pmatrix} X_w$
 
 
 # 三角測量
-`3次元空間の復元` `未知: 3次元座標` `外部パラメータ`
-$su = K\begin{pmatrix}R & T\end{pmatrix} X_w$
+`3次元空間の復元` `未知: 3次元座標` `外部パラメータ` <br />
+$`su = K\begin{pmatrix}R & T\end{pmatrix} X_w`$
 - 既知: 外部パラメータの既知な2つの視点に移る点の画素
 - 未知: 3次元座標
 
@@ -139,26 +117,26 @@ $su = K\begin{pmatrix}R & T\end{pmatrix} X_w$
    K = | 0   fv cv |
        | 0   0  1  |
 ```
-$
+$$
     K = \begin{pmatrix} f_u & 0   & c_u \\
                         0   & f_v & c_v \\
                         0   & 0   & 1 \end{pmatrix}
-$
+$$
 
 
 Kの第3行をのぞいた行列をK'とする。
 カメラ座標系の3D点
-$χc=\begin{pmatrix}X_c & Y_c & Z_c\end{pmatrix}^T$
+$`χc=\begin{pmatrix}X_c & Y_c & Z_c\end{pmatrix}^T`$
 は以下の式で画像平面上の点
-$z=\begin{pmatrix}u & v\end{pmatrix}^T$
+$`z=\begin{pmatrix}u & v\end{pmatrix}^T`$
 に投影される。
 ```
     z = 1 / Zc K'χc
 ```
 
 ワールド座標系->カメラ座標系の変換は各カメラの外部パラメータを考える必要がある。
-カメラの位置姿勢が並進ベクトルtcwと回転行列Rcwで表されるとき、ワールド座標系の3D点χw=(Xw, Yw, Zw)Tをカメラ座標系に変換すると、
-χc=[Rcw|tcw]χwとなる。
+カメラの位置姿勢が並進ベクトル$`tcw`$と回転行列$`Rcw`$で表されるとき、ワールド座標系の3D点$`χw=(Xw, Yw, Zw)T`$をカメラ座標系に変換すると、
+$`χc=[Rcw|tcw]χw`$となる。
 ```
     z = 1/Zc K'[Rcw|tcw]χw
 ```
@@ -201,15 +179,16 @@ $z=\begin{pmatrix}u & v\end{pmatrix}^T$
 
 
 ## 基礎行列
-基礎行列Fは3x3行列,カメラの内部パラメータKと2つのカメラの外部パラメータ[R|t]の両方の情報を含む。
-これはエピポーラ拘束と呼ばれ、一方のz1が決まればもう一方の画像上の対応店z2に関する制約を与えることができる。
-カメラ1$\begin{pmatrix} u_1 & v_1\end{pmatrix}$とカメラ2$\begin{pmatrix} u_2 & v_2 \end{pmatrix}$の制約が決まる。
+`内部パラメータがキャリブレーションされていない場合`
+基礎行列$`F`$は3x3行列,カメラの内部パラメータKと2つのカメラの外部パラメータ$`[R|t]`$の両方の情報を含む。
+これはエピポーラ拘束と呼ばれ、一方の$`z1`$が決まればもう一方の画像上の対応点$`z2`$に関する制約を与えることができる。
+カメラ1$`\begin{pmatrix} u_1 & v_1\end{pmatrix}$とカメラ2$\begin{pmatrix} u_2 & v_2 \end{pmatrix}`$の制約が決まる。
 ```
             | f11 f12 f13 ||u1|
    (u2 v2 1)| f21 f22 f23 ||v1| = z2TFz1 = 0
             | f31 f32 f33 ||1 |
 ```
-$ \begin{pmatrix}
+$$ \begin{pmatrix}
     u_2 & v_2 & 1
   \end{pmatrix}
   \begin{pmatrix}
@@ -223,16 +202,15 @@ $ \begin{pmatrix}
     1
   \end{pmatrix}
   = z_{2}^{T}Fz_{1} = 0
-$
+$$
 
 
-画像$I_1$上の点$z_1$に対応する画像$I_2$上のエピポーラ線は$l_2=Fz_1$であらわされる。
-これを、上の式に代入すると$z^T_2l_2$となる。
-同様に画像$I_2$上の点$z_2$に対応する画像$I_1$上のエピポーラ線は、$l_1=F^Tz_2$で表される。
-
+画像$`I_1`$上の点$`z_1`$に対応する画像$`I_2`$上のエピポーラ線は$`l_2=Fz_1`$であらわされる。
+これを、上の式に代入すると$`z^T_2l_2`$となる。
+同様に画像$`I_2`$上の点$`z_2`$に対応する画像$`I_1`$上のエピポーラ線は、$`l_1=F^Tz_2`$で表される。
 
 上の式を展開します。
-$
+$$
 \begin{pmatrix}
     u_2 & v_2 & 1
   \end{pmatrix}
@@ -246,8 +224,8 @@ $
     v_1 \\
     1
   \end{pmatrix}
-$
-$
+$$
+$$
 \begin{pmatrix}
     u_2f_{11}+v_2f_{21}+f_{31} & u_2f_{12}+v_2f_{22}+f_{32} & u_2f_{13}+v_2f_{23}+f_{33}
 \end{pmatrix}
@@ -256,10 +234,10 @@ $
     v_1 \\
     1
 \end{pmatrix}
-$
-$
+$$
+$$
     u_1u_2f_{11}+u_1_2f_{21}+u_1f_{31}+u_2v_1f_{12}+v_1v_2f_{22}+v_1f_{32}+u_2f_{13}+v_2f_{23}+f_{33}
-$
+$$
 
 こうして線形方程式で表すことができました。
 
