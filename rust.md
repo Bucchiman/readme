@@ -29,8 +29,16 @@
     - 3.3 関数
         - 3.3.1 関数の引数
         - 3.3.2 関数本体は、文と式を含む
+        - 3.3.3 戻り値のある関数
     - 3.4 コメント
     - 3.5 フロー制御
+        - 3.5.1 if式
+            - 3.5.1.1 else if で複数の条件を扱う
+            - 3.5.1.2 let文内でif式を使う
+        - 3.5.2 ループでの繰り返し
+            - 3.5.2.1 loopでコードを繰り返す
+            - 3.5.2.2 whileで条件付ループ
+            - 3.5.2.3 forでコレクションを覗き見る
     - 3.6 まとめ
 
 - 4. 所有権を理解する
@@ -211,7 +219,7 @@
 ```
 ```rust
     fn main() {
-        let x = (let y = 6);    # 文は値を返さないからエラー
+        let x = (let y = 6);    // 文は値を返さないからエラー
     }
 ```
 
@@ -219,7 +227,7 @@
 ```rust
     fn main() {
         let x = 6;
-        let y = {       # 新しいスコープを作る際に使用するブロック
+        let y = {       // 新しいスコープを作る際に使用するブロック
             let x = 3;
             x + 1
         };
@@ -233,7 +241,7 @@
     
 ```rust
     fn five() -> i32 {
-        5              # 式として値を返す
+        5              // 式として値を返す
     }
     fn main() {
         let x = five();
@@ -246,7 +254,117 @@
   </details>
  
 
-## 3.4
+## 3.5 フロー制御
+<details>
+    <summary> 3.5.1 if式 </summary>
+    <div>
+        <details>
+            <summary> 3.5.1.1 else if で複数の条件を扱う</summary>
+            <div>
+            </div>
+        </details>
+        <details>
+            <summary> 3.5.1.2 let文内でif式を使う</summary>
+            <div>
+                ```rust
+                    fn main() {
+                        let condition = true;
+                        let number = if condition {
+                            5
+                        }
+                        else {
+                            6
+                        };
+                        println!("The value of number is: {}", number);
+                    }
+                ```
+
+                ```rust
+                    fn main() {
+                        let condition = true;
+                        let number = if condition {
+                            5
+                        } else {
+                            "six"     // if, elseアームの互換性が合わずエラー
+                        };
+                        println!("The value of number is: {}", number);
+                    }
+                ```
+            </div>
+        </details>
+    </div>
+</details>
+<details>
+    <summary> 3.5.2 ループでの繰り返し </summary>
+    <div>
+        <details>
+            <summary> 3.5.2.1 loopでコードを繰り返す </summary>
+            <div>
+                `loopキーワード`
+                ```rust
+                    fn main() {
+                        loop {
+                            println!("again!");
+                        }
+                    }
+                ```
+            </div>
+        </details>
+        <details>
+            <summary> 3.5.2.2 whileで条件付ループ </summary>
+            <div>
+                ```rust
+                    fn main() {
+                        let mut number = 3;
+                        while number != 0 {
+                            println!("{}!", number);
+                            number = number - 1;
+                        }
+                    }
+                ```
+            </div>
+        </details>
+        <details>
+            <summary> 3.5.2.3 forでコレクションを覗き見る </summary>
+            <div>
+                - 非推奨コード
+                    - 添え字の長さが間違えばパニック
+                    - ループごとに境界値チェックが行われ、遅い <br />
+                ```rust
+                    fn main() {
+                        let a = [10, 20, 30, 40, 50];
+                        let mut index = 0;
+
+                        while index < 5 {
+                            println!("the value is: {}", a[index])
+                            index = index + 1;
+                        }
+                    }
+                ```
+
+                - 推奨コード
+                    - 終端を超える恐れもなく安全 <br />
+                ```rust
+                    fn main() {
+                        let a = [10, 20, 30, 40, 50];
+                        for element in a.iter() {
+                            println!("the value is: {}", element);
+                        }
+                    }
+                ```
+
+                - 逆順
+                ```rust
+                    fn main() {
+                        for number in (1..4).rev() {
+                            println!("{}!", number);
+                        }
+                    }
+                ```
+            </div>
+        </details>
+    </div>
+</details>
 
 
 # 構造体
