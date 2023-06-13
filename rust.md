@@ -266,8 +266,9 @@
         <details>
             <summary> 3.5.1.2 let文内でif式を使う</summary>
             <div>
-                ```rust
-                    fn main() {
+             
+   ```rust
+      fn main() {
                         let condition = true;
                         let number = if condition {
                             5
@@ -277,7 +278,7 @@
                         };
                         println!("The value of number is: {}", number);
                     }
-                ```
+                ``` <br />
 
                 ```rust
                     fn main() {
@@ -294,13 +295,14 @@
         </details>
     </div>
 </details>
+</details>
 <details>
     <summary> 3.5.2 ループでの繰り返し </summary>
     <div>
         <details>
             <summary> 3.5.2.1 loopでコードを繰り返す </summary>
             <div>
-                `loopキーワード`
+                `loopキーワード` <br />
                 ```rust
                     fn main() {
                         loop {
@@ -365,7 +367,7 @@
         </details>
     </div>
 </details>
-
+</details>
 
 # 構造体
 
