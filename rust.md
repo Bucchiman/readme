@@ -465,8 +465,8 @@
     - 5.5 オブジェクトの海に立ち向かう
 
 
-# 3.3 文字
-# 3.4 タプル
+## 3.3 文字
+## 3.4 タプル
 ```rust
     let text = "I see the eigenvalue in thine eye";
     let (head, tail) = text.split_at(21);
@@ -482,5 +482,88 @@
     assert_eq!(tail, "in thine eye");
 ``` <br />
 
-- unit type
--  
+### unit type <br />
+0要素のタプル
+- std::mem::swap
+```rust
+    fn swap<T>(x: &mut T, y: &mut T)
+```
+swap関数は以下と等価である。
+```rust
+    fn swap<T>(x: &mut T, y: &mut T) -> ();
+```
+
+## 3.5 ポインタ型
+### 3.5.1 参照
+- rustにはnull参照を作る方法がない
+- &x ... xへの参照を借用する
+- &T <br />
+変更不能な共有参照。
+ある値に対して複数の共有参照をもつくことができるが、値を読み出すことしかできない。
+Cのconst T*
+
+- &mut T
+
+### 3.5.2 Box
+ヒープ上に値を確保するもっとも簡単な方法
+```rust
+    let t = (12, "eggs");
+    let b = Box::new(t);
+```<br />
+
+
+### 3.5.3 rawポインタ
+
+
+## 3.6 配列、ベクタ、スライス
+### 3.6.1 配列
+```rust
+    let lazy_caterer: [u32; 6] = [1, 2, 4, 7, 11, 16];
+    let taxonomy = ["Animalia", "Arthropoda", "Insecta"];
+
+    assert_eq!(lazy_caterer[3], 7);
+    assert_eq!(taxonomy.len(), 3);
+```
+
+```rust
+    let mut sieve = [true; 10000];
+    for i in 2..100 {
+        if sieve[i] {
+            let mut j = i*i;
+            while j < 10000 {
+                sieve[j] = false;
+                j += i;
+            }
+        }
+    }
+```
+
+### 3.6.2 ベクタ
+`ベクタVec<T>はヒープ上に確保されるサイズを変更することができる型Tの配列である` <br />
+vec!マクロにより使用できる
+```rust
+    let mut primes = vec![2, 3, 5, 7];
+    assert_eq!(primes.iter().product::<i32>(), 210);   # 2x3x5x7
+    primes.push(11);
+    primes.push(13);
+    assert_eq!(primes.iter().product::<i32>(), 30030);
+```
+
+#### 宣言方法
+- let mut primes = vec![2, 3, 5];    # マクロ
+- let mut unko = vec![0; 1000];      # 配列リテラル様式
+- let mut pal = Vec::new(); 
+- let v: Vec<i32> = (0..5).collect();
+
+### 3.6.3 スライス
+
+
+## 3.7 文字列型
+### 3.7.1 文字列リテラル
+### 3.7.2 バイト文字列
+### 3.7.3 メモリ上の文字列
+### 3.7.4 文字列String
+### 3.7.5 文字列の使用
+### 3.7.6 他の文字列に類する型
+## 3.8 型エイリアス
+## 3.9 基本方の先にあるもの
