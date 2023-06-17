@@ -504,13 +504,14 @@
     assert_eq!(tail, "in thine eye");
 ```
 
-### unit type <br />
+### unit type
 0要素のタプル
 - std::mem::swap
 ```rust
     fn swap<T>(x: &mut T, y: &mut T)
     # -> fn swap<T>(x: &mut T, y: &mut T) -> ();
-``` <br />
+```
+
 - write_image <br />
 ```rust
     fn write_image -> Result<(), std::io::Error)
@@ -535,7 +536,7 @@ Cのconst T*に相当
 ```rust
     let t = (12, "eggs");
     let b = Box::new(t);    # ヒープ上にタプルを確保
-```<br />
+```
 
 ### 3.5.3 rawポインタ
 
@@ -560,7 +561,6 @@ Cのconst T*に相当
                 j += i;
             }
 =======
-- unit type
 
 ## 3.6 配列、ベクタ、スライス
 メモリ上の値の列を表現する方は３つ
