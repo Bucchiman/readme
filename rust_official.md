@@ -553,5 +553,112 @@ Box::new(v)を呼ぶと、ヒープ上にメモリを確保し、値vをそこ�
     }
 ```
 
+## 6.3 ブロックとセミコロン
+`ブロックは値を生み出す(;なし)` <br />
+```rust
+    let msg = {
+        // let-declaration: semicolon is always required
+        let dandelion_control = puffball.open();
 
+        // expression + semicolon: method is called, return value dropped
+        dandelion_control.release_all_seeds(launch_codes);
 
+        // expression with no semicolon: method is called, return value stored in `msg`
+        dandelion_control.get_status()
+    }
+```
+
+## 6.4 宣言
+`let name: type = expr;` `型と初期化式は省略できる` `シャドーイング: 変数を再び宣言して型を変える`
+
+- e.g. アイテムの宣言 <br />
+```rust
+    use std::io;
+    use std::cmp::Ordering;
+
+    fn show_files() -> io::Result<()> {
+        let mut v = vec![];
+
+        fn cmp_by_timestamp_then_name(a: &FileInfo, b: &FileInfo) -> Ordering {
+            a.timestamp.cmp(&b.timestamp).reverse().then(a.path.cmp(&b.path))
+        }
+        v.sort_by(cmp_by_timestamp_then_name);
+    }
+```
+
+## 6.5 ifとmatch
+
+- e.g. 定数
+```rust
+    match code {
+        0 => println!("OK"),
+        1 => println!("Wires Tangled"),
+        2 => println!("User Asleep"),
+        _ => println!("Unrecognized Error {}", code)
+    }
+```
+
+- e.g. Option値
+```rust
+    match params.get("name") {
+        Some(name) => println!("Hello, {}!", name),
+        None => println!("Greetings, stranger.")
+    }
+```
+
+## 6.6 if let式
+`exprがpatternにマッチするならblock1が実行` `OptionやResultからデータを取り出すのに便利`
+```rust
+    if let pattern = expr {
+        block1
+    } else {
+        block2
+    }
+```
+
+- e.g.
+```rust
+    if let Some(cookie) = request.session_cookie {
+        return restore_session(cookie);
+    }
+    if let Err(err) = show_cheesy_anti_robot_task() {
+        log_robot_attempt(err);
+        politely_accuse_user_of_being_a_robot();
+    } else {
+        session.mark_as_human();
+    }
+```
+
+## 6.7 ループ
+```rust
+    while condition {
+        block
+    }
+
+    while let pattern = expr {
+        block
+    }
+    
+    loop {
+        block
+    }
+
+    for pattern in iterrable {
+        block
+    }
+```
+
+## 6.8 ループ内の制御フロー
+```rust
+    let answer = loop {
+        if let Some(line) = next_line() {
+            if line.starts_with("answer: ") {
+                break line;
+            }
+        } else {
+            break "answer: nothing";
+        }
+    };
+```
+
+## 6.9 return 式
