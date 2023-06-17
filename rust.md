@@ -278,9 +278,9 @@
                         };
                         println!("The value of number is: {}", number);
                     }
-                ``` <br />
+```
 
-                ```rust
+```rust
                     fn main() {
                         let condition = true;
                         let number = if condition {
@@ -290,12 +290,13 @@
                         };
                         println!("The value of number is: {}", number);
                     }
-                ```
+```
             </div>
         </details>
     </div>
 </details>
 </details>
+
 <details>
     <summary> 3.5.2 ループでの繰り返し </summary>
     <div>
@@ -466,16 +467,34 @@
 
 - 6. 式
     - 6.1 式言語
-
+## 3.1 固定長数値
+### 3.1.1 整数型
+- C, C++ ... size_t, ptrdiff_t
+- Rust ... usize, isize
+### 3.1.2 チェック付き演算、ラップ演算、飽和演算、オーバーフロー演算
+```rust
+    let mut i: i32 = 1;
+    loop {
+        // panic: multiplication overflowed いずれのビルドでもエラー
+        i = i.checked_mul(10).expect("multiplication overflowed");
+    }
+```
+#### チェック付き演算
+#### ラップ演算
+#### 飽和演算
+#### オーバーフロー演算
+### 3.1.3 浮動小数点数
+## 3.2 真偽値型
 ## 3.3 文字
 ## 3.4 タプル
+- e.g. <br />
 ```rust
     let text = "I see the eigenvalue in thine eye";
     let (head, tail) = text.split_at(21);
     assert_eq!(head, "I see the eigenvalue ");
     assert_eq!(tail, "in thine eye");
 ```
-
+- e.g. <br />
 ```rust
     let text = "I see the eigenvalue in thine eye";
     let temp = text.split_at(21);
@@ -490,30 +509,33 @@
 - std::mem::swap
 ```rust
     fn swap<T>(x: &mut T, y: &mut T)
-```
-swap関数は以下と等価である。
+    # -> fn swap<T>(x: &mut T, y: &mut T) -> ();
+``` <br />
+- write_image <br />
 ```rust
-    fn swap<T>(x: &mut T, y: &mut T) -> ();
+    fn write_image -> Result<(), std::io::Error)
+    # エラーが起きればstd::io::Errorを返すが、成功時には何も返さないこと
 ```
 
 ## 3.5 ポインタ型
 ### 3.5.1 参照
+`&T` `&mut T` <br />
 - rustにはnull参照を作る方法がない
 - &x ... xへの参照を借用する
 - &T <br />
 変更不能な共有参照。
 ある値に対して複数の共有参照をもつくことができるが、値を読み出すことしかできない。
-Cのconst T*
+Cのconst T*に相当
 
-- &mut T
+- &mut T <br />
+排他的な可変参照。参照先の値を読み出し、変更することができる。CのT*に相当
 
 ### 3.5.2 Box
 ヒープ上に値を確保するもっとも簡単な方法
 ```rust
     let t = (12, "eggs");
-    let b = Box::new(t);
+    let b = Box::new(t);    # ヒープ上にタプルを確保
 ```<br />
-
 
 ### 3.5.3 rawポインタ
 
@@ -569,7 +591,74 @@ Tの共有スライス及びTの可変スライス。
 ```
 
 ### 3.6.2 ベクタ
+`Vec<T> ... ヒープ上に確保されるサイズを変更することができる`
+- e.g. <br />
+```rust
+    let mut primes = vec![2, 3, 5, 7];
+    assert_eq!(primes.iter().product::<i32>(), 210);
+```
 
+- e.g. <br />
+```rust
+    let mut pal = Vec::new();
+    pal.push("step");
+```
+
+- e.g. <br />
+```rust
+    let v: Vec<i32> = (0..5).collect();
+    assert_eq!(v, [0, 1, 2, 3, 4]);
+```
+
+- e.g. <br />
+Vec<T>は3つの値をヒープ上に確保する。
+```rust
+    let mut v = Vec::with_capacity(2);
+```
+
+### 3.6.3 スライス
+```rust
+    let v: Vec<f64> = vec![0.0, 0.707, 1.0, 0.707];
+    let a: [f64; 4] = [0.0, -0.707, -1.0, -0.707];
+
+    let sv: &[f64] = &v;
+    let sa: &[f64] = &a;
+```
+```
+              v                    a               sa     sv
+    +-------------------------------------------------------------+
+    |      |.|4|4|     |0.0|-0.707|-1.0|-0.707|   |.|4|  |.|4|    |
+    +-------|------------|-------------------------|------|-------+
+            | 容量,長さ  +-------------------------+      |
+            +----------+       参照(所有権なし)           |
+   所有権のあるポインタ | +-------------------------------+  参照(所有権なし)
+               +-------|-|------------------------------+
+               |      |0.0|0.707|1.0|0.707|             |
+               +----------------------------------------+
+```
+
+```rust
+    fn print(n: &[f64]) {
+        for elt in n {
+            println!("{}", elt);
+        }
+    }
+    print(&a);      # 配列に対しても動作
+    print(&v);      # ベクタに対して動作
+    print(&[0..2]);
+    print(&a[2..]);
+    print(&sv[1..3]);
+```
+
+## 3.7 文字列型
+### 3.7.1 文字列リテラル
+### 3.7.2 バイト文字列
+### 3.7.3 メモリ上の文字列
+### 3.7.4 文字列String
+### 3.7.5 文字列の使用
+### 3.7.6 他の文字列に類する型
+## 3.8 型エイリアス
+## 3.9 基本方の先のあるもの
 
 # 4. 所有権と移動
 メモリ管理の特徴は2つある。
