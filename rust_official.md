@@ -662,3 +662,97 @@ Box::new(v)を呼ぶと、ヒープ上にメモリを確保し、値vをそこ�
 ```
 
 ## 6.9 return 式
+
+
+# 8. クレートとモジュール
+## 8.1 クレート
+`プロジェっくと間のコード共有のため` <br />
+- e.g. use宣言 <br />
+```rust
+    use num::Complex;       // クレートのアイテムをuse宣言で指定
+    use image::ColorType;
+```
+
+- e.g. Cargo.tomlでは、個々のクレートの使いたいバージョンを指定
+```rust
+    [dependencies]
+    num = "0.4"             // creates.ioを参照
+    image = "0.13"
+    crossbeam = "0.8"
+```
+
+- ライブラリのコンパイル <br />
+`rustc --create-type libによりmain()関数を探さず、.rlibファイルを作るようになる`
+
+- 本体プログラム(main.rs)のコンパイル <br />
+`rustc --crate-type binによりターゲット環境の実行ファイルが生成`
+
+### 8.1.1 エディション
+`既存のコードを破壊することなく進化を続けるため導入された` `edition="2021"` <br />
+
+### 8.1.2 ビルドプロファイル
+| コマンドライン        | Cargo.tomlのセクション |
+|-----------------------|------------------------|
+| cargo build           | [profile.dev]          |
+| cargo build --release | [profile.release]      |
+| cargo test            | [profile.test]         |
+
+
+## 8.2 モジュール
+`プロジェクト内部のコード構造化のため` `モジュールはアイテムの集合体` <br />
+```rust
+    mod spores {                                                       // モジュール
+        use cells::{Cell, Gene};
+
+        pub struct Spore {
+        }
+
+        pub fn produce_spore(factory: &mut Sporangium) -> Spore {      // モジュールの外からアクセスできる
+        }
+
+        pub(crate) fn genes(spore: &Spore) -> Vec<Gene> {              // クレートの内部ではどこからでもアクセスできるが、外部インターフェイスの一部としては公開されない
+        }
+
+        fn recombine(parent: &mut Cell) {
+        }
+    }
+```
+
+### 8.2.1 モジュールのネスト
+`モジュールはネストすることができる` `サブモジュールを集めただけのモジュールも見られる`
+
+```rust
+    pub mod plant_structures {       // 内部のサブモジュールを他のクレートからも使えるようにするために外側のモジュールもpubにする
+        pub mod roots {
+        }
+        pub mod stems {
+        }
+        pub mod leaves {
+        }
+    }
+```
+
+### 8.2.2 モジュールの複数ファイルへの分割
+- パターン1(明示的にモジュールを宣言) <br />
+```rust
+    mod spores {
+        ...
+    }
+```
+
+- パターン2(spores.rsにモジュール構成要素を含める(明示的にモジュール宣言しない))
+```rust
+    // spores.rs
+    pub struct Spore {
+    }
+
+    pub fn produce_spore(factory: &mut Sporangium) -> Spore {
+    }
+
+```
+
+- モジュールをディレクトリで構成することもできる <br />
+`mod spores;によりspores.rsやspores/mod.rsをチェック`
+
+### 8.2.3 パスとインポート
+`モジュール機能にアクセスするには::演算子を用いる`
