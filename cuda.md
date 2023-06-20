@@ -65,10 +65,16 @@
         - 7.3.1 char, short, int, long, longlong, float, double
         - 7.3.2 dim3
     - 7.4 Built-in Variables
+        - 7.4.1 gridDim
+        - 7.4.2 blockIdx
+        - 7.4.3 blockDim
+        - 7.4.4 threadIdx
+        - 7.4.5 warpSize
     - 7.5 Memory Fence Functions
     - 7.6 Synchronization Functions
     - 7.7 Mathematical Functions
     - 7.8 Texture Functions
+        - 7.8.1 Texture Object API
     - 7.9 Surface Functions
     - 7.10 Read-Only Data Cache Load Function
     - 7.11 Load Functions Using Cache Hints
