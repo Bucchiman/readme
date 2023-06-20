@@ -8,6 +8,38 @@
 -->
 
 
+- Tutorials
+    - Beginner: CLI tools
+        - Configure environment
+        - Using turtlesim, ros2, and rqt
+        - Understanding nodes
+        - Understanding topics
+        - Understanding services
+        - Understanding parameters
+        - Understanding actions
+        - Using rqt_console to view logs
+        - Launching nodes
+        Recording and playing back data
+    - Beginner: Client libraries
+        - Using colcon to build packages
+        - Creating a workspace
+        - Creating a package
+        - Writing a simple publisher and subscriber (C++)
+        - Writing a simple publisher and subscriber (python)
+        - Writing a simple service and client (C++)
+        - Writing a simple service and client (python)
+        - Creating custom msg and srv files
+        - Implementing custom interfaces
+        - Using parameters in a class (C++)
+        - Using parameters in a class (python)
+        - Using ros2doctor to identify issues
+        - Creating and using plugins (C++)
+    - Intermediate
+    - Advanced
+    - Demos
+    - Miscellaneous
+
+
 # Tutorials
 <details>
 <summary>Beginner:CLI tools</summary>
