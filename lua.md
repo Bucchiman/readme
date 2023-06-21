@@ -306,13 +306,41 @@
     sin(10, 20)        --> 10 20
 ```
 ## 6.1 Closures
+- [参照](https://nishi2.info/pydp/GoF_dp/other/python_class_is_first-class_object.html) <br />
 ```lua
     names = {"Peter", "Paul", "Mary"}
     grades = {Mary = 10, Paul = 7, Peter = 8}
     table.sort(names, function (n1, n2)
         return grades[n1] > grades[n2]
     end)
+
+    -->
+    function sortbygrade (names, grades)
+        table.sort(names, function (n1, n2)
+            return grades[n1] > grades[n2]   -- compare the grades
+        end)                                 -- 関数内関数
+    end
 ```
+
+```lua
+    function newCounter ()
+        local i = 0
+        return function ()
+            i = i+1
+            return i
+        end
+    end
+
+    c1 = newCounter()
+    print(c1())  --> 1
+    print(c1())  --> 2
+
+    c2 = newCounter()
+    print(c2())  --> 1
+    print(c1())  --> 3
+    print(c2())  --> 2
+```
+
 
 ## 6.2 Non-Global Functions
 ## 6.3 Proper Tail Calls
