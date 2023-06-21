@@ -297,7 +297,23 @@
 ## 5.3 Named Arguments
 
 # [6. More about Functions](https://www.lua.org/pil/6.html)
+```lua
+    a = {a = print}
+    a.p("Hello World") --> Hello World
+    print = math.sin   -- 'print' now refers to the sing function
+    a.p(print(1))
+    sin = a.p          -- 'sin' now refers to the print function
+    sin(10, 20)        --> 10 20
+```
 ## 6.1 Closures
+```lua
+    names = {"Peter", "Paul", "Mary"}
+    grades = {Mary = 10, Paul = 7, Peter = 8}
+    table.sort(names, function (n1, n2)
+        return grades[n1] > grades[n2]
+    end)
+```
+
 ## 6.2 Non-Global Functions
 ## 6.3 Proper Tail Calls
 
