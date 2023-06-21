@@ -8,11 +8,11 @@
 -->
 
 # Part I · The Language
-- 1 [Getting Started](https://www.lua.org/pil/1.html)
-    - 1.1 [Chunks](https://www.lua.org/pil/1.1.html)
-    - 1.2 Global Variables
-    - 1.3 Some Lexical Conventions
-    - 1.4 The Stand-Alone Interpreter
+- [1. Getting Started](https://www.lua.org/pil/1.html)
+    - [1.1 Chunks](#11-Chunks)
+    - [1.2 Global Variables](#12-Global-Variables)
+    - [1.3 Some Lexical Conventions](#13-SOme-Lexical-Conventions)
+    - [1.4 The Stand-Alone Interpreter](#14-The-Stand-Alone-Interpreter)
 - 2 Types and Values
     - 2.1 Nil
     - 2.2 Booleans
@@ -170,3 +170,10 @@
 - 29 Managing Resources
     - 29.1 A Directory Iterator
     - 29.2 An XML Parser
+
+
+# [1. Getting Started](https://www.lua.org/pil/1.html)
+## 1.1 Chunks
+## 1.2 Global Variables
+## 1.3 Some Lexical Conventions
+## 1.4 The Stand-Alone Interpreter
