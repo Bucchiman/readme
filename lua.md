@@ -382,7 +382,29 @@
 ### 12.1.1 Saving Tables without Cycles
 ### 12.1.2 Saving Tables with Cycles
 # [13. Metatables and Metamethods](https://www.lua.org/pil/13.html)
+```lua
+    t = {}
+    print(getmetatable(t))     --> nil
+
+    t1 = {}
+    setmetatable(t, t1)
+    assert(getmetatable(t) == t1)
+```
 ## 13.1 Arithmetic Metamethods
+```lua
+    Set = {}
+
+    function Set.new (t)
+        local set = {}
+        for _, l in ipairs(t) do set[l] = true end
+            return set
+    end
+
+    function Set.union(a, b)
+        local res = Set.new{}
+        for k in pairs(a) do res[k]
+    end
+```
 ## 13.2 Relational Metamethods
 ## 13.3 Library-Defined Metamethods
 ## 13.4 Table-Access Metamethods
