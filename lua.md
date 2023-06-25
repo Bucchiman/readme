@@ -361,7 +361,59 @@
 
 # [9. Coroutines](https://www.lua.org/pil/9.html)
 ## 9.1 Coroutine Basics
+`coroutine.create` `coroutine.resume` `coroutine.status` `coroutine.yield` <br />
+```lua
+    co = coroutine.create(function ()
+        print("hi")
+    )
+```
 ## 9.2 Pipes and Filters
+`consumer-producerからcoroutineを考える` <br />
+
+- e.g. wrong <br />
+```lua
+
+
+    function producer()
+        while true do
+            local x = io.read()
+            send(x)
+        end
+    end
+
+    function consumer()
+        while true do
+            local x = receive()
+            io.write(x, "\n")
+        end
+    end
+```
+
+上の構造の問題点はsendとreceiveを一致させる方法にある。
+
+- e.g.
+```lua
+    function receive ()
+        local status, value = coroutine.resume(producer)
+        return value
+    end
+
+    function send(x)
+        coroutine.yield(x)
+    end
+
+    producer = coroutine.create(
+        function ()
+            while true do
+                local x = io.read()
+                send(x)
+            end
+    end)
+```
+
+coroutineがyieldを呼び出した時、coroutineは新たな関数には入らず、待機関数をresumeに返す。同様にresumeへの呼び出しは新たな関数を始めるが、yieldへの呼び出しを返す。
+
+
 ## 9.3 Coroutines as Iterators
 ## 9.4 Non-Preemptive Multithreading
 
@@ -409,6 +461,20 @@
 ## 13.3 Library-Defined Metamethods
 ## 13.4 Table-Access Metamethods
 ### 13.4.1 The __index Metamethod
+```lua
+    -- create a namespace
+    Window = {}
+    -- create the prototype with default values
+    Window.prototype = {x=0, y=0, width=100, height=100,}
+    -- declare the constructor function
+    function Window.new(o)
+        setmetatable(o, {__index=Window.prototype})
+        return o
+    end
+
+    w = Window.new{x=10, y=20}
+    print(w.width)               --> 100
+```
 ### 13.4.2 The __newindex Metamethod
 ### 13.4.3 Tables with Default Values
 ### 13.4.4 Tracking Table Accesses
