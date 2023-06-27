@@ -347,6 +347,26 @@
 
 # [7. Iterators and the Generic for](https://www.lua.org/pil/7.html)
 ## 7.1 Iterators and Closures
+An iterator is any construction that allows you lto iterate over the elements of a collection.
+
+```lua
+    function list_iter (t)
+        local i = 0
+        local n = table.getn(t)
+        return function ()
+            i = i+1
+            if i<=n then return t[i] end
+        end
+    end
+```
+
+```lua
+    t = {10, 20, 30}
+    for element in list_iter(t) do
+        print(element)
+    end
+```
+
 ## 7.2 The Semantics of the Generic for
 ## 7.3 Stateless Iterators
 ## 7.4 Iterators with Complex State
