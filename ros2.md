@@ -9,7 +9,7 @@
 
 
 - Tutorials
-    - Beginner: CLI tools
+    - [Beginner: CLI tools](#Beginner-CLI-tools)
         - Configure environment
         - Using turtlesim, ros2, and rqt
         - Understanding nodes
@@ -41,8 +41,9 @@
 
 
 # Tutorials
+## Beginner: CLI tools
 <details>
-<summary>Beginner:CLI tools</summary>
+<summary>Beginner: CLI tools</summary>
  <div>
 
  ## Understanding nodes <br />
