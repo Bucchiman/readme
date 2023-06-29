@@ -262,6 +262,12 @@ kernel関数はスレッド単位で並列に実行される
     blockDim.x = 6
     blockDim.y = 4
 
+       x
+    ---->
+  y |
+    |
+    v
+
     #    +================+
     #         0       1
     #    =+------+-------+=
@@ -285,10 +291,10 @@ kernel関数はスレッド単位で並列に実行される
     #    =+------++------+=
     #    +================+
 
-    threadIdx.x = 2
-    threadIdx.y = 1
-    blockIdx.x = 1
-    blockIdx.y = 1
+    threadIdx.x = 2  // threadのid(x)
+    threadIdx.y = 1  // threadのid(y)
+    blockIdx.x = 1   // blockのid(x)
+    blockIdx.y = 1   // blockのid(y)
 
     #    +================+
     #         0       1
@@ -646,4 +652,27 @@ blockIdx.x*blockDim.x+threadIdx.x    0 1 2 3  4 5 6 7  8 91011
 -: block
 /: thread
 
+```
+
+
+# 画像処理 x CUDA
+
+```
+blockDim.x*blockIdx.x
+                 threadIdx.x
+   +-----+-----+-----+-----+
+   -/////-/////-/////-/////- blockDim.y*blockIdx.y
+   -/////-/////-/////-/////-
+   -/////-/////-/////-/////-
+   -/////-/////-/////-/////-
+   +-----+-----+-----+-----+
+   -/////-/////-/////-/////-
+   -/////-/////-/////-/////-
+   -/////-/////-//x//-/////- threadIdx.y
+   -/////-/////-/////-/////-
+   +-----+-----+-----+-----+
+```
+```
+   GlobalId(x) = blockDim.x * blockIdx.x + threadIdx.x
+   GlobalId(y) = blockDim.y * blockIdx.y + threadIdx.y
 ```
