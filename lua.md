@@ -341,9 +341,23 @@
     print(c2())  --> 2
 ```
 
+```lua
+    function digitButton(digit)
+        return Button {
+            label = digit,
+            action = function ()        -- callback function
+                add_to_display(digit)
+            end
+        }
+    end
+```
+
+
+
 
 ## 6.2 Non-Global Functions
 ## 6.3 Proper Tail Calls
+
 
 # [7. Iterators and the Generic for](https://www.lua.org/pil/7.html)
 ## 7.1 Iterators and Closures
@@ -445,6 +459,7 @@ coroutineがyieldを呼び出した時、coroutineは新たな関数には入ら
 # [11. Data Structures](https://www.lua.org/pil/11.html)
 ## 11.1 Arrays
 ## 11.2 Matrices and Multi-Dimensional Arrays
+
 ## 11.3 Linked Lists
 ## 11.4 Queues and Double Queues
 ## 11.5 Sets and Bags
@@ -458,10 +473,18 @@ coroutineがyieldを呼び出した時、coroutineは新たな関数には入ら
     t = {}
     print(getmetatable(t))     --> nil
 
+=======
+`Each table in Lua may have its own metatable.`
+```lua
+    t = {}                    -- Lua always create new tables without metatables
+    print(getmetatable(t))    --> nil
+```
+```lua
     t1 = {}
     setmetatable(t, t1)
     assert(getmetatable(t) == t1)
 ```
+
 ## 13.1 Arithmetic Metamethods
 ```lua
     Set = {}
