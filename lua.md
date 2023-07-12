@@ -522,6 +522,23 @@ coroutineがyieldを呼び出した時、coroutineは新たな関数には入ら
 ### 13.4.3 Tables with Default Values
 ### 13.4.4 Tracking Table Accesses
 ### 13.4.5 Read-Only Tables
+
+## [Understanding Colon and Dot Operators](https://docs.coronalabs.com/tutorial/basics/colonDotOperators/index.html)
+`Dotは暗示的なselfが含まれていないため、self(つまり自分自身のインスタンス)修飾子は使えない`
+`Colonは暗示的なselfが含まれる` <br />
+```lua
+    local object = {}
+    function object.dotMethod(parameter1, parameter2)
+        print(self.someNumber)
+    end
+    function object:colonMethod(parameter1, parameter2)
+        print(self.someNumber)
+    end
+    object.someNumber = 10
+    object.dotMethod("Hello", "World")      --> error
+    object:colonMethod("Hello", "World")    --> 10
+```
+
 # [14. The Environment](https://www.lua.org/pil/14.html)
 ## 14.1 Accessing Global Variables with Dynamic Names
 ## 14.2 Declaring Global Variables
