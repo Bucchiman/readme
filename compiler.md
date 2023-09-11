@@ -161,3 +161,20 @@
 - 命令選択、レジスタ確保、命令のスケジュール
 
 ## 
+
+
+
+
+
+
+# gccの役割
+<!-- LLVMとRISC-Vによる低レイヤプログラミングの基礎 -->
+
+```bash
+    source code -> preprocessor -> compiler -> assemble codes -> assembler -> object file -> linker -> executable files
+```
+
+- プリプロセッサ    ... hello.cのマクロを処理
+- コンパイラ        ... hello.cをコンパイルしアセンブリファイル生成
+- アセンブラ        ... アセンブリファイルからオブジェクトファイルを生成
+- リンカ            ... オブジェクトファイルから実行ファイルを生成
