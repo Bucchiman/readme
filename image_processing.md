@@ -17,7 +17,8 @@
     - [ガンマ補正](#ガンマ補正)
     - [バイラテラルフィルタ](#バイラテラルフィルタ)
 - [コーナー検出]
-- [特徴点検出]
+- [Feature Detection and Description]
+    - [Harris Corner Detection]
     - [ORB]
     - []
 

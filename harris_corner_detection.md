@@ -9,12 +9,14 @@
 
 
 # harris corner detector
-`コーナー検出`
+`コーナー検出` `It basically finds the difference in intensity for a displacement of (u,v) in all directions`
+
 ## 理論
-全方向に対して画素位置(u, v)の移動量に対する画素値の違いを検出
-
-
-$E(u, v) = \sum_{(x, y)\in W}w(x, y)[I(x+u, y+v)-I(x, y)]^2 $
+全方向に対して画素位置$(u, v)$の移動量に対する画素値の違いを検出 <br>
+$E(u, v) = \sum_{(x, y)\in W}w(x, y)[(I(x+u, y+v)-I(x, y))^2]$ <br>
+$ w(x, y) ... window function(rectangle window, gaussian window) $ <br>
+$ I(x+u, y+v) ... shifted intensity $ <br>
+$ I(x, y) ... Intensity $ <br>
 平行移動量(u, v)が非常に小さいと仮定, (u, v)に対して拘束条件$u^2+v^2=1$が加わる。
 仮定から、テイラー展開をする。
 $E(u, v) = \sum_{(x, y)\in W}w(x, y)[I(x, y)+I_{x}(x)\times u + I_{y}(y)\times v - I(x, y)]^2$
